@@ -1,9 +1,6 @@
 package com.example.bookback.service;
 
-import com.example.bookback.dto.JoinMemberInfoDto;
-import com.example.bookback.dto.MemberRequestDto;
 import com.example.bookback.dto.MemberResponseDto;
-import com.example.bookback.entity.Member;
 import com.example.bookback.jwt.SecurityUtil;
 import com.example.bookback.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +17,12 @@ public class MemberService {
     private MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-//    public MemberResponseDto getMyInfoBySecurity() {
-//        System.out.println("!"+SecurityUtil.getCurrentMemberId());
-//        return memberRepository.findByUserSn(SecurityUtil.getCurrentMemberId())
-//                .map(MemberResponseDto::of)
-//                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
-//    }
+    public MemberResponseDto getMyInfoBySecurity() {
+        System.out.println("!"+SecurityUtil.getCurrentMemberId());
+        return memberRepository.findByUserSn(Math.toIntExact(SecurityUtil.getCurrentMemberId()))
+                .map(MemberResponseDto::of)
+                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+    }
 
 //    public MemberResponseDto findMemberByEmailAndPw(String email, String pw) {
 //        return memberRepository.findByUserEmailAndUserPw(email, pw)

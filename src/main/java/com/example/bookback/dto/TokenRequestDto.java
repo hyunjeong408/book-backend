@@ -8,4 +8,7 @@ import lombok.NoArgsConstructor;
 
 public class TokenRequestDto {
     private String token;
+    public TokenRequestDto(String token){
+        this.token = token;
+    }
 }

@@ -47,8 +47,6 @@ public class AuthService {
 
     public MemberResponseDto getInfo(TokenRequestDto tokenDto) {
         Integer user_sn = tokenProvider.getAllClaimsFromToken(tokenDto.getToken());
-//        System.out.print("Hiii"+claims);
-//        Member member = new Member(claims);
         return memberRepository.findByUserSn(user_sn)
                 .map(MemberResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));

@@ -1,14 +1,16 @@
 package com.example.bookback.controller;
 
-import com.example.bookback.dto.BoardDto;
+import com.example.bookback.dto.BoardPostRequestDto;
+import com.example.bookback.dto.BoardResponseDto;
+import com.example.bookback.dto.TokenRequestDto;
+import com.example.bookback.entity.Board;
+import com.example.bookback.service.AuthService;
 import com.example.bookback.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/board")
@@ -16,15 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
 
     private final BoardService boardService;
+    private final AuthService authService;
 
-//    @PostMapping("/posts")
-//    public ResponseEntity<BoardDto> registerPost(@RequestBody BoardDto boardDto){
-//        if (boardDto.getId() != null) {
-//            throw new RuntimeException("A new post cannot already have an ID");
-//        } else {
-//            BoardDto returnPost = boardService.registerPost(boardDto);
-//            return new ResponseEntity<BoardDto>(returnPost, HttpStatus.CREATED);
-//        }
-//    }
+    @PostMapping("/post")
+    public ResponseEntity<BoardResponseDto> PostBoard(@RequestBody BoardPostRequestDto postRequestDto){
+        System.out.println(postRequestDto.getContent());
+        TokenRequestDto tokenRequestDto = new TokenRequestDto(postRequestDto.getWriter_token());
+        Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
+        return ResponseEntity.ok(boardService.post(postRequestDto, user_sn));
+    }
+
+    @GetMapping("/")
+    public List<Board> getAllBoardList(){
+        return boardService.getAllBoard();
+    }
 
 }

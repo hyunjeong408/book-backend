@@ -1,14 +1,10 @@
 package com.example.bookback.controller;
 
-import com.example.bookback.dto.JoinMemberInfoDto;
-import com.example.bookback.dto.MemberRequestDto;
 import com.example.bookback.dto.MemberResponseDto;
 import com.example.bookback.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
 @RestController
 @RequestMapping("/member")
 public class MemberController {
@@ -35,13 +31,13 @@ public class MemberController {
 //        return responseRes;
 //    }
 
-//    @GetMapping("/me")
-//    public ResponseEntity<MemberResponseDto> getMyMemberInfo() {
-//        MemberResponseDto myInfoBySecurity = memberService.getMyInfoBySecurity();
-//        System.out.println("?"+myInfoBySecurity.getUser_name());
-//        return ResponseEntity.ok((myInfoBySecurity));
-//        // return ResponseEntity.ok(memberService.getMyInfoBySecurity());
-//    }
+    @GetMapping("/me")
+    public ResponseEntity<MemberResponseDto> getMyMemberInfo() {
+        MemberResponseDto myInfoBySecurity = memberService.getMyInfoBySecurity();
+        System.out.println("?"+myInfoBySecurity.getUser_name());
+        return ResponseEntity.ok((myInfoBySecurity));
+        // return ResponseEntity.ok(memberService.getMyInfoBySecurity());
+    }
 
 //    @PostMapping("/nickname")
 //    public ResponseEntity<MemberResponseDto> setMemberNickname(@RequestBody MemberRequestDto request) {
