@@ -22,7 +22,6 @@ public class BoardController {
 
     @PostMapping("/post")
     public ResponseEntity<BoardResponseDto> PostBoard(@RequestBody BoardPostRequestDto postRequestDto){
-        System.out.println(postRequestDto.getContent());
         TokenRequestDto tokenRequestDto = new TokenRequestDto(postRequestDto.getWriter_token());
         Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
         return ResponseEntity.ok(boardService.post(postRequestDto, user_sn));
