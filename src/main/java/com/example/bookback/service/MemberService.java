@@ -18,7 +18,6 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     public MemberResponseDto getMyInfoBySecurity() {
-        System.out.println("!"+SecurityUtil.getCurrentMemberId());
         return memberRepository.findByUserSn(Math.toIntExact(SecurityUtil.getCurrentMemberId()))
                 .map(MemberResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));

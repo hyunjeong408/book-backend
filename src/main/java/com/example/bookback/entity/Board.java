@@ -35,13 +35,9 @@ public class Board {
     private Timestamp updateDate;
 
     @Column(name="rec_num")
-//    @Builder.Default
-//    @ColumnDefault("0")
     private Integer recNum = 0;
 
     @Column(name="hits")
-//    @Builder.Default
-//    @ColumnDefault("0")
     private Integer hits=0;
 
 
