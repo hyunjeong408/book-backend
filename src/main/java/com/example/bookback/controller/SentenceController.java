@@ -1,8 +1,6 @@
 package com.example.bookback.controller;
 
-import com.example.bookback.dto.SentencePostRequestDto;
-import com.example.bookback.dto.SentenceResponseDto;
-import com.example.bookback.dto.TokenRequestDto;
+import com.example.bookback.dto.*;
 import com.example.bookback.entity.Sentence;
 import com.example.bookback.service.AuthService;
 import com.example.bookback.service.SentenceService;
@@ -25,6 +23,19 @@ public class SentenceController {
         TokenRequestDto tokenRequestDto = new TokenRequestDto(postRequestDto.getWriter_token());
         Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
         return ResponseEntity.ok(sentenceService.post(postRequestDto, user_sn, postRequestDto.getTag_id()));
+    }
+
+    @PutMapping("/detail/like")
+    public Boolean UpdateLikes(@RequestBody LikeSentenceRequestDto like_update){
+        TokenRequestDto tokenRequestDto = new TokenRequestDto(like_update.getWriter_token());
+        Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
+        return sentenceService.updateLikes(like_update.getPost_id(), user_sn, like_update.getUpdate_n());
+    }
+    @GetMapping("/detail/")
+    public Boolean chkSentenceLiked(@RequestParam Integer id, @RequestParam String token){
+        TokenRequestDto tokenRequestDto = new TokenRequestDto(token);
+        Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
+        return sentenceService.chkSentenceLiked(id,user_sn);
     }
 
     @GetMapping("/")

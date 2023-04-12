@@ -60,4 +60,12 @@ public class Review {
         this.hashtag = tag;
         this.hits = 0;
     }
+
+    public void updateHits(){
+        this.hits = this.hits+1;
+    }
+
+    public void updatelikeNum(){
+        this.likeNum += this.likeNum+1;
+    }
 }

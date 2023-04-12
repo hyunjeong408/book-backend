@@ -52,4 +52,6 @@ public class Sentence {
         this.likeNum = 0;
         this.hashtag = tag;
     }
+
+    public void updateLikeNum(Integer n) { this.likeNum += n; }
 }

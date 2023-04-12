@@ -1,8 +1,6 @@
 package com.example.bookback.controller;
 
-import com.example.bookback.dto.BoardPostRequestDto;
-import com.example.bookback.dto.BoardResponseDto;
-import com.example.bookback.dto.TokenRequestDto;
+import com.example.bookback.dto.*;
 import com.example.bookback.entity.Board;
 import com.example.bookback.service.AuthService;
 import com.example.bookback.service.BoardService;
@@ -26,10 +24,24 @@ public class BoardController {
         Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
         return ResponseEntity.ok(boardService.post(postRequestDto, user_sn));
     }
-
+    @PutMapping("/detail/hit")
+    public void Hit(@RequestBody HitUpdateRequestDto board_update){
+        boardService.updateHits(board_update.getId());
+    }
+    @PutMapping("/detail/recommend")
+    public Boolean UpdateRecommend(@RequestBody RecOrLikeRequestDto rec_update){
+        System.out.println(rec_update);
+        TokenRequestDto tokenRequestDto = new TokenRequestDto(rec_update.getWriter_token());
+        Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
+        return boardService.updateRecommend(rec_update.getPost_id(), user_sn);
+    }
     @GetMapping("/")
     public List<Board> getAllBoardList(){
         return boardService.getAllBoard();
+    }
+    @GetMapping("/detail/")
+    public ResponseEntity<BoardResponseDto> getBoardDetail(@PathVariable("id") Integer board_id){
+        return ResponseEntity.ok(boardService.getBoard(board_id));
     }
 
 }

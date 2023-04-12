@@ -50,4 +50,12 @@ public class Board {
         this.recNum = 0;
         this.hits = 0;
     }
+
+    public void updateHits(){
+        this.hits = this.hits+1;
+    }
+
+    public void updateRecNum(){
+        this.recNum += this.recNum+1;
+    }
 }
