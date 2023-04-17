@@ -39,6 +39,9 @@ public class BoardController {
     public List<Board> getAllBoardList(){
         return boardService.getAllBoard();
     }
+
+    @GetMapping("/hot")
+    public List<Board> getHotBoardList(){ return boardService.getHotBoard(); }
     @GetMapping("/detail/")
     public ResponseEntity<BoardResponseDto> getBoardDetail(@PathVariable("id") Integer board_id){
         return ResponseEntity.ok(boardService.getBoard(board_id));

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
     List<Review> findAllByOrderByUpdateDateDesc();
+
+    List<Review> findTop10ByOrderByLikeNumDesc();
 }

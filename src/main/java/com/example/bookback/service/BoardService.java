@@ -73,5 +73,7 @@ public class BoardService {
 
     }
 
+    public List<Board> getHotBoard() { return boardRepository.findTop10ByOrderByRecNumDesc(); }
+
 
 }

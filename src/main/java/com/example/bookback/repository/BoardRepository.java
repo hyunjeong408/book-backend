@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Integer> {
     List<Board> findAllByOrderByUpdateDateDesc();
+    List<Board> findTop10ByOrderByRecNumDesc();
 }

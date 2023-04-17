@@ -71,6 +71,7 @@ public class ReviewService {
             return false;
         }
     }
+    public List<Review> getHotReview(){ return reviewRepository.findTop10ByOrderByLikeNumDesc(); }
     public ReviewResponseDto getReview(Integer reviewId){
         Optional<Review> reviewOptional = reviewRepository.findById(reviewId);
         Review review = reviewOptional.get();

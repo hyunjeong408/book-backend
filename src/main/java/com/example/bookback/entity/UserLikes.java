@@ -64,6 +64,28 @@ public class UserLikes {
         this.fantasy = 0;
     }
 
+    public int getUserSn(){
+        return this.user.getUserSn();
+    }
+
+    public int[] getUserLikesArray(){
+        int[] arr = new int[9];
+        arr[0] = this.etc;
+        arr[1] = this.love;
+        arr[2] = this.growth;
+        arr[3] = this.horror;
+        arr[4] = this.art;
+        arr[5] = this.life;
+        arr[6] = this.comedy;
+        arr[7] = this.reality;
+        arr[8] = this.fantasy;
+        return arr;
+    }
+
+    public int getUserLikesCnt(){
+        return this.etc+this.love+this.growth+this.horror+this.art+this.life+this.comedy+this.reality+this.fantasy;
+    }
+
     public void updateLikes(Integer tag_id){
         switch (tag_id){
             case 1:

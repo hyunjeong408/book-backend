@@ -38,6 +38,18 @@ public class SentenceController {
         return sentenceService.chkSentenceLiked(id,user_sn);
     }
 
+    @GetMapping("/recommend")
+    public List<Sentence> getRecSentenceList(@RequestParam String token){
+        if(token.length()>0){
+            TokenRequestDto tokenRequestDto = new TokenRequestDto(token);
+            Integer user_sn = authService.getInfo(tokenRequestDto).getUser_sn();
+            return sentenceService.getSentencesToRecommend(user_sn);
+        }
+        else{//토큰 없을 때(로그인 x)
+            return sentenceService.getTop10Sentences();
+        }
+        //return sentenceService.getAllSentences();
+    }
     @GetMapping("/")
     public List<Sentence> getAllSentenceList(){
         return sentenceService.getAllSentences();

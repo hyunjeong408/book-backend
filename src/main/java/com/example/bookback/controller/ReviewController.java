@@ -40,6 +40,9 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.getReview(review_id));
     }
 
+    @GetMapping("/hot")
+    public List<Review> getHotReviewList() { return reviewService.getHotReview(); }
+
     @GetMapping("/")
     public List<Review> getAllReviewList(){
         return reviewService.getAllReviews();
